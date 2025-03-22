@@ -33,7 +33,7 @@ st.markdown(
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background-color: rgba(195, 75, 255, 0.5); /* Updated color with 50% opacity */
+            background-color: rgba(195, 75, 255, 0.5);
             width: 100%;
             height: 100%;
             box-sizing: border-box;
@@ -47,6 +47,23 @@ st.markdown(
         }
         .column-container {
             margin-bottom: 20px;
+        }
+
+        /* Custom input styles */
+        div[data-baseweb="select"] > div {
+            background-color: #c34bff !important;
+            color: white !important;
+            border-radius: 5px !important;
+        }
+        input[type="text"], input[type="number"] {
+            background-color: #c34bff !important;
+            color: white !important;
+            border-radius: 5px !important;
+            border: 1px solid white !important;
+            padding: 5px;
+        }
+        .stSlider > div[data-baseweb="slider"] > div {
+            background-color: #c34bff !important;
         }
     </style>
     """,
@@ -78,11 +95,11 @@ month_options = [
 ]
 month = col1.selectbox("Month", month_options)
 nationality = col2.selectbox("Nationality", ["Indian", "Turkish", "Egyptian", "Indonesian", "Jordanian", "Pakistani", "Sudanese"])
-age = col1.number_input("Age", min_value = 1, max_value = 70, step = 1, value = 30)
+age = col1.number_input("Age", min_value=1, max_value=70, step=1, value=30)
 umrah_type = col1.selectbox("Umrah Type", ["Individual", "Group"])
 accommodation_type = col2.selectbox("Accommodation Type", ["Hotel", "Apartment", "Relative's House"])
 transportation_mode = col2.selectbox("Transportation Mode", ["Bus", "Private Car", "Taxi", "On Foot"])
-stay_duration = st.slider("Stay Duration (days)", min_value = 1, max_value = 30, step = 1, value = 10)
+stay_duration = st.slider("Stay Duration (days)", min_value=1, max_value=30, step=1, value=10)
 
 st.divider()
 
