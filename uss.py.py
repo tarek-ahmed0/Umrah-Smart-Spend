@@ -10,7 +10,7 @@ st.markdown(
 
         .header-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem; /* Reduced size for mobile */
+            font-size: 1.25rem;
             font-weight: bold;
             color: #ffffff;
             display: flex;
@@ -19,12 +19,12 @@ st.markdown(
         }
         .header-subtitle {
             font-family: 'Poppins', sans-serif;
-            font-size: 0.875rem; /* Reduced size for mobile */
+            font-size: 1rem;
             color: #c34bff;
         }
         .divider {
             border-top: 1px solid #170225;
-            margin: 15px 0;
+            margin: 20px 0;
         }
         .solid-border {
             border: 3px solid rgba(30, 10, 50);
@@ -32,16 +32,21 @@ st.markdown(
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
-            background-color: rgba(195, 75, 255, 0.5);
+            padding: 20px;
+            background-color: rgba(195, 75, 255, 0.5); /* Updated color with 50% opacity */
             width: 100%;
+            height: 100%;
             box-sizing: border-box;
         }
-        .violet-label label {
+        .column-label {
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
             font-weight: bold;
-            color: #c34bff; /* Violet color for input labels */
+            font-size: 1.1rem;
+            color: #6C63FF;
+            margin-bottom: 10px;
+        }
+        .column-container {
+            margin-bottom: 20px;
         }
     </style>
     """,
@@ -71,37 +76,13 @@ month_options = [
     "January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"
 ]
-
-with col1:
-    month = st.selectbox("Month", month_options, key="month", help="Select your travel month", 
-                         format_func=lambda x: f"🗓 {x}", 
-                         args=(st.session_state,), 
-                         label_visibility="visible", 
-                         placeholder="Select a month", 
-                         help_visibility="visible", 
-                         disabled=False, 
-                         options=month_options, 
-                         index=None, 
-                         css_classes="violet-label")
-
-    age = st.number_input("Age", min_value=1, max_value=70, step=1, value=30, key="age", 
-                          css_classes="violet-label")
-
-    umrah_type = st.selectbox("Umrah Type", ["Individual", "Group"], key="umrah_type", 
-                              css_classes="violet-label")
-
-with col2:
-    nationality = st.selectbox("Nationality", ["Indian", "Turkish", "Egyptian", "Indonesian", "Jordanian", "Pakistani", "Sudanese"], 
-                               key="nationality", css_classes="violet-label")
-
-    accommodation_type = st.selectbox("Accommodation Type", ["Hotel", "Apartment", "Relative's House"], 
-                                      key="accommodation_type", css_classes="violet-label")
-
-    transportation_mode = st.selectbox("Transportation Mode", ["Bus", "Private Car", "Taxi", "On Foot"], 
-                                       key="transportation_mode", css_classes="violet-label")
-
-stay_duration = st.slider("Stay Duration (days)", min_value=1, max_value=30, step=1, value=10, 
-                          key="stay_duration", css_classes="violet-label")
+month = col1.selectbox("Month", month_options)
+nationality = col2.selectbox("Nationality", ["Indian", "Turkish", "Egyptian", "Indonesian", "Jordanian", "Pakistani", "Sudanese"])
+age = col1.number_input("Age", min_value = 1, max_value = 70, step = 1, value = 30)
+umrah_type = col1.selectbox("Umrah Type", ["Individual", "Group"])
+accommodation_type = col2.selectbox("Accommodation Type", ["Hotel", "Apartment", "Relative's House"])
+transportation_mode = col2.selectbox("Transportation Mode", ["Bus", "Private Car", "Taxi", "On Foot"])
+stay_duration = st.slider("Stay Duration (days)", min_value = 1, max_value = 30, step = 1, value = 10)
 
 st.divider()
 
