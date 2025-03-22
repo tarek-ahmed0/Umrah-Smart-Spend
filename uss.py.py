@@ -10,7 +10,7 @@ st.markdown(
 
         .header-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.25rem;
+            font-size: 1.75rem;
             font-weight: bold;
             color: #ffffff;
             display: flex;
