@@ -38,11 +38,12 @@ st.markdown(
             height: 100%;
             box-sizing: border-box;
         }
-        /* Change color of input labels to violet */
-        .st-emotion-cache-10trblm {
+        
+        /* Change color of all labels (text of inputs) */
+        label {
             color: #c34bff !important;
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: bold;
         }
     </style>
