@@ -77,12 +77,12 @@ month_options = [
     "August", "September", "October", "November", "December"
 ]
 month = col1.selectbox("Month", month_options)
-nationality = col2.text_input("Nationality", "Egypt")
-age = col1.number_input("Age", min_value=1, max_value=100, step=1, value=30)
-umrah_type = col1.selectbox("Umrah Type", ["Economy", "Standard", "Luxury"])
-accommodation_type = col2.selectbox("Accommodation Type", ["Hotel", "Apartment", "Hostel"])
-transportation_mode = col2.selectbox("Transportation Mode", ["Bus", "Car", "Airplane"])
-stay_duration = st.slider("Stay Duration (days)", min_value=1, max_value=30, step=1, value=10)
+nationality = col2.text_input(Nationality, ["Indian", "Turkish", "Egyptian", "Indonesian", "Jordanian", "Pakistani", "Sudanese"])
+age = col1.number_input("Age", min_value = 1, max_value = 100, step = 1, value = 30)
+umrah_type = col1.selectbox("Umrah Type", ["Individual", "Group"])
+accommodation_type = col2.selectbox("Accommodation Type", ["Hotel", "Apartment", "Relative's House"])
+transportation_mode = col2.selectbox("Transportation Mode", ["Bus", "Private Car", "Taxi", "On Foot"])
+stay_duration = st.slider("Stay Duration (days)", min_value = 1, max_value = 30, step = 1, value = 10)
 
 st.divider()
 
