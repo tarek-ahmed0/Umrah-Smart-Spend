@@ -33,7 +33,7 @@ st.markdown(
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background-color: rgba(195, 75, 255, 0.5);
+            background-color: rgba(115, 79, 150, 0.5);
             width: 100%;
             height: 100%;
             box-sizing: border-box;
@@ -41,7 +41,7 @@ st.markdown(
         
         /* Change color of all labels (text of inputs) */
         label {
-            color: #cec8ef ;
+            color: #dcd0ff ;
             font-family: 'Poppins', sans-serif;
             font-size: 1.15rem;
             font-weight: bold;
