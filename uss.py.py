@@ -10,7 +10,7 @@ st.markdown(
 
         .header-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #ffffff;
             display: flex;
@@ -38,32 +38,12 @@ st.markdown(
             height: 100%;
             box-sizing: border-box;
         }
-        .column-label {
+        /* Change color of input labels to violet */
+        .st-emotion-cache-10trblm {
+            color: #c34bff !important;
             font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
             font-weight: bold;
-            font-size: 1.1rem;
-            color: #6C63FF;
-            margin-bottom: 10px;
-        }
-        .column-container {
-            margin-bottom: 20px;
-        }
-
-        /* Custom input styles */
-        div[data-baseweb="select"] > div {
-            background-color: #c34bff !important;
-            color: white !important;
-            border-radius: 5px !important;
-        }
-        input[type="text"], input[type="number"] {
-            background-color: #c34bff !important;
-            color: white !important;
-            border-radius: 5px !important;
-            border: 1px solid white !important;
-            padding: 5px;
-        }
-        .stSlider > div[data-baseweb="slider"] > div {
-            background-color: #c34bff !important;
         }
     </style>
     """,
@@ -79,6 +59,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Load models
 with open("umrah_spending_prediction.pkl", "rb") as model_file:
     model = pickle.load(model_file)
 
@@ -88,7 +69,9 @@ with open("encoder.pkl", "rb") as enc_file:
 with open("scaler.pkl", "rb") as scaler_file:
     scaler = pickle.load(scaler_file)
 
+# Inputs
 col1, col2 = st.columns(2)
+
 month_options = [
     "January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"
@@ -103,6 +86,7 @@ stay_duration = st.slider("Stay Duration (days)", min_value=1, max_value=30, ste
 
 st.divider()
 
+# Encoding inputs
 cat_features = pd.DataFrame([[month, nationality, umrah_type, accommodation_type, transportation_mode]],
                             columns=["Month", "Nationality", "Umrah_Type", "Accommodation_Type", "Transportation_Mode"])
 
