@@ -10,7 +10,7 @@ st.markdown(
 
         .header-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;  /* Smaller size for mobile */
+            font-size: 1rem; /* Reduced size for mobile */
             font-weight: bold;
             color: #ffffff;
             display: flex;
@@ -19,16 +19,16 @@ st.markdown(
         }
         .header-subtitle {
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;  /* Smaller subtitle */
+            font-size: 0.875rem; /* Reduced size for mobile */
             color: #c34bff;
         }
         .divider {
             border-top: 1px solid #170225;
-            margin: 15px 0;  /* Reduced margin */
+            margin: 15px 0;
         }
         .solid-border {
-            border: 2px solid rgba(30, 10, 50);
-            border-radius: 5px;
+            border: 3px solid rgba(30, 10, 50);
+            border-radius: 3px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -37,21 +37,25 @@ st.markdown(
             width: 100%;
             box-sizing: border-box;
         }
-        .column-label {
+        .violet-label label {
             font-family: 'Poppins', sans-serif;
-            font-size: 0.85rem;  /* Smaller font for mobile */
-            color: #6C63FF;
+            font-size: 1rem;
             font-weight: bold;
-            margin-bottom: 5px;
+            color: #c34bff; /* Violet color for input labels */
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-st.markdown("### :violet[🕋 Umrah Spending Predictor]")
-st.markdown(":violet[Estimate your Umrah trip expenses based on your choices.]")
-st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class="header-title">🕋 Umrah Spending Predictor</div>
+    <div class="header-subtitle">Estimate your Umrah trip expenses based on your choices.</div>
+    <div class="divider"></div>
+    """,
+    unsafe_allow_html=True
+)
 
 with open("umrah_spending_prediction.pkl", "rb") as model_file:
     model = pickle.load(model_file)
@@ -63,37 +67,44 @@ with open("scaler.pkl", "rb") as scaler_file:
     scaler = pickle.load(scaler_file)
 
 col1, col2 = st.columns(2)
-
 month_options = [
     "January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"
 ]
 
-# Using markdown for labels with :violet[]
-st.markdown(":violet[Month]")
-month = col1.selectbox("", month_options)
+with col1:
+    month = st.selectbox("Month", month_options, key="month", help="Select your travel month", 
+                         format_func=lambda x: f"🗓 {x}", 
+                         args=(st.session_state,), 
+                         label_visibility="visible", 
+                         placeholder="Select a month", 
+                         help_visibility="visible", 
+                         disabled=False, 
+                         options=month_options, 
+                         index=None, 
+                         css_classes="violet-label")
 
-st.markdown(":violet[Nationality]")
-nationality = col2.selectbox("", ["Indian", "Turkish", "Egyptian", "Indonesian", "Jordanian", "Pakistani", "Sudanese"])
+    age = st.number_input("Age", min_value=1, max_value=70, step=1, value=30, key="age", 
+                          css_classes="violet-label")
 
-st.markdown(":violet[Age]")
-age = col1.number_input("", min_value=1, max_value=70, step=1, value=30)
+    umrah_type = st.selectbox("Umrah Type", ["Individual", "Group"], key="umrah_type", 
+                              css_classes="violet-label")
 
-st.markdown(":violet[Umrah Type]")
-umrah_type = col1.selectbox("", ["Individual", "Group"])
+with col2:
+    nationality = st.selectbox("Nationality", ["Indian", "Turkish", "Egyptian", "Indonesian", "Jordanian", "Pakistani", "Sudanese"], 
+                               key="nationality", css_classes="violet-label")
 
-st.markdown(":violet[Accommodation Type]")
-accommodation_type = col2.selectbox("", ["Hotel", "Apartment", "Relative's House"])
+    accommodation_type = st.selectbox("Accommodation Type", ["Hotel", "Apartment", "Relative's House"], 
+                                      key="accommodation_type", css_classes="violet-label")
 
-st.markdown(":violet[Transportation Mode]")
-transportation_mode = col2.selectbox("", ["Bus", "Private Car", "Taxi", "On Foot"])
+    transportation_mode = st.selectbox("Transportation Mode", ["Bus", "Private Car", "Taxi", "On Foot"], 
+                                       key="transportation_mode", css_classes="violet-label")
 
-st.markdown(":violet[Stay Duration (days)]")
-stay_duration = st.slider("", min_value=1, max_value=30, step=1, value=10)
+stay_duration = st.slider("Stay Duration (days)", min_value=1, max_value=30, step=1, value=10, 
+                          key="stay_duration", css_classes="violet-label")
 
-st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+st.divider()
 
-# Process features
 cat_features = pd.DataFrame([[month, nationality, umrah_type, accommodation_type, transportation_mode]],
                             columns=["Month", "Nationality", "Umrah_Type", "Accommodation_Type", "Transportation_Mode"])
 
@@ -112,9 +123,7 @@ if st.button("Predict Spending"):
     st.markdown(
         f"""
         <div class="solid-border">
-            <h3 style="color: white; font-family: 'Poppins', sans-serif; font-size: 1.1rem;">
-                🪙 Expected Budget : {prediction:,.0f} Riyal
-            </h3>
+            <h3 style="color: white; font-family: 'Poppins', sans-serif;">🪙 Expected Budget : {prediction:,.0f} Riyal</h3>
         </div>
         """,
         unsafe_allow_html=True
