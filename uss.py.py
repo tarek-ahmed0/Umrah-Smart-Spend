@@ -41,7 +41,7 @@ st.markdown(
         
         /* Change color of all labels (text of inputs) */
         label {
-            color: #BFB9FA ;
+            color: #cec8ef ;
             font-family: 'Poppins', sans-serif;
             font-size: 1.15rem;
             font-weight: bold;
