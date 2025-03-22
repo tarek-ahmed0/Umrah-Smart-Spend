@@ -74,7 +74,7 @@ month_options = [
 
 with col1:
     month = st.selectbox("Month", month_options, key="month", help="Select your travel month", 
-                         format_func=lambda x: f"🗓️ {x}", 
+                         format_func=lambda x: f"🗓 {x}", 
                          args=(st.session_state,), 
                          label_visibility="visible", 
                          placeholder="Select a month", 
