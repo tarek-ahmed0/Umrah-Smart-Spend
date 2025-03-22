@@ -10,12 +10,12 @@ st.markdown(
 
         .header-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
+            font-size: 1.25rem;
             font-weight: bold;
             color: #ffffff;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
         }
         .header-subtitle {
             font-family: 'Poppins', sans-serif;
