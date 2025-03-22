@@ -10,7 +10,7 @@ st.markdown(
 
         .header-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: bold;
             color: #ffffff;
             display: flex;
@@ -41,9 +41,9 @@ st.markdown(
         
         /* Change color of all labels (text of inputs) */
         label {
-            color: #c34bff !important;
+            color: #BFB9FA ;
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
+            font-size: 1.15rem;
             font-weight: bold;
         }
     </style>
@@ -60,7 +60,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Load models
 with open("umrah_spending_prediction.pkl", "rb") as model_file:
     model = pickle.load(model_file)
 
@@ -83,11 +82,10 @@ age = col1.number_input("Age", min_value=1, max_value=70, step=1, value=30)
 umrah_type = col1.selectbox("Umrah Type", ["Individual", "Group"])
 accommodation_type = col2.selectbox("Accommodation Type", ["Hotel", "Apartment", "Relative's House"])
 transportation_mode = col2.selectbox("Transportation Mode", ["Bus", "Private Car", "Taxi", "On Foot"])
-stay_duration = st.slider("Stay Duration (days)", min_value=1, max_value=30, step=1, value=10)
+stay_duration = st.slider("Stay Duration In Days", min_value=1, max_value=30, step=1, value=10)
 
 st.divider()
 
-# Encoding inputs
 cat_features = pd.DataFrame([[month, nationality, umrah_type, accommodation_type, transportation_mode]],
                             columns=["Month", "Nationality", "Umrah_Type", "Accommodation_Type", "Transportation_Mode"])
 
