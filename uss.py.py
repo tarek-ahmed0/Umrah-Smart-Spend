@@ -53,7 +53,7 @@ st.markdown(
 
 st.markdown(
     """
-    <div class="header-title">🕋 Umrah Spending Predictor</div>
+    <div class="header-title">Umrah Spending Predictor 🕋</div>
     <div class="header-subtitle">Estimate your Umrah trip expenses based on your choices.</div>
     <div class="divider"></div>
     """,
